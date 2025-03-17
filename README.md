@@ -19,6 +19,8 @@ With this data in hand, the question was how to use it effectively. We tested ma
 
 <p align="center">Table 1: Convolutional Neural Network for Image Generation Approach</p>
 
+<div align="center">
+
 | Layer (type)                | Output Shape  | Param #  |
 |-----------------------------|--------------|---------:|
 | conv2d_12 (Conv2D)          | (None, 9, 9, 32)  | 1,184   |
@@ -38,6 +40,8 @@ With this data in hand, the question was how to use it effectively. We tested ma
 | dropout_14 (Dropout)        | (None, 9, 9, 32)  | 0       |
 | conv2d_17 (Conv2D)          | (None, 9, 9, 1)   | 33      |
 
+</div>
+
 Our CNN model is designed to predict paths in mazes using the following components:
 
 - **Convolutional Layers**: Multiple layers with increasing filters (32, 64, 128) to capture features from basic to complex.
@@ -51,9 +55,11 @@ Our CNN model is designed to predict paths in mazes using the following componen
 
 First, we treated the images as pictures and fed all unsolved and solved maze images to a CNN. The model successfully recreated walls, start points, and end points, but not the path. 
 
-<p align="center">Illustraion 1: Failed Attempt to Create Solution Image from Unsolved Mazes</p>
+<p align="center">Illustration 1: Failed Attempt to Create Solution Image from Unsolved Mazes</p>
 
-![alt text](materials/badmodel1.png)
+<p align="center">
+  <img src="materials/badmodel1.png" alt="Failed Attempt">
+</p>
 
 
 We realized this approach was incorrect and decided to feed only images with solutions to predict unsolved mazes.
@@ -74,20 +80,27 @@ To achieve this, we reduced the image size to match the maze dimensions, making 
 
 <p align="center">Illustraion 2: Encoding Mazes</p>
 
-![alt text](materials/encode.png)
+<p align="center">
+  <img src="materials/encode.png" alt="Description of image">
+</p>
 
 We separated the path matrices as the target variable (Y) and fed them to the CNN.
 
 <p align="center">Illustraion 3: Split X and y - First Trial</p>
 
-![alt text](<materials/Screenshot 2025-03-17 at 14.49.10.png>)
+<p align="center">
+  <img src="materials/pptsummary.png" alt="Description of image">
+</p>
+
 However, problems arose as the model performed poorly. We tried different models and increased the training size to 5,000 pairs of mazes and solutions, but still achieved 0% match.
 
 Then, we realized that splitting the input (X) into channels might work. We used one-hot encoding to split X into three channels: walls, start, and goal. The target (Y) was the path.
 
 <p align="center">Illustraion 4: Split X to Channels</p>
 
-![alt text](<materials/channels split.png>)
+<p align="center">
+  <img src="materials/channels split.png" alt="Description of image">
+</p>
 
 - An X is now 3D array (3 channels), size 9x9x3
 - An y is now 2D array, size 9x9
@@ -99,7 +112,9 @@ The graphs show training and validation loss, along with exact match accuracy ov
 
 <p align="center">Illustraion 5: Train and Loss - CNN with Encoded Input</p>
 
-![alt text](materials/Trainencode.png)
+<p align="center">
+  <img src="materials/Trainencode.png" alt="Description of image">
+</p>
 
 Although the accuracy appears low due to the strict 100% match requirement, the predicted results are actually quite good. This indicates that the model is effectively learning to solve the mazes, even if not every prediction is a perfect match.
 
@@ -113,15 +128,22 @@ The high accuracy, over 96%, can be explained by the imbalance in the target arr
 
 <p align="center">Illustraion 6: Performance on Test Set - CNN with Encoded Input</p>
 
-![alt text](materials/encodedpredict.png)
-![alt text](materials/predencode2.png)
+<p align="center">
+  <img src="materials/encodedpredict.png" alt="Encoded Predict">
+</p>
+
+<p align="center">
+  <img src="materials/predencode2.png" alt="Predicted Encode">
+</p>
 
 When applied to the 10 real mazes, the performance was impressive, with 7 out of 10 mazes solved correctly.
 
 
 <p align="center">Illustraion 7: Performance on 10 Real Mazes - CNN with Encoded Input</p>
 
-![alt text](<materials/Screenshot 2025-03-17 at 15.15.58.png>)
+<p align="center">
+  <img src="materials/pptsummary1.png" alt="Summary">
+</p>
 
 ### Conclusion  
 The model already performs well, but our goal is to solve 10 out of 10 mazes. This method has several advantages, such as being easy to interpret, aligning closely with the nature of CNNs, and effectively capturing spatial hierarchies. However, there are downsides, such as the need for synthetic data for training and testing. Considering the time and effort involved, it may not be as efficient as using simpler algorithms like Dijkstra's.
@@ -151,6 +173,8 @@ The CNN consists of an input layer, a convolutional layer with 32 filters, a fla
 
 <p align="center">Table 2: Convolutional Neural Network for RL Approach</p>
 
+<div align="center">
+
 | Layer                 | Output Shape     | Parameters |
 |----------------------|-----------------|-----------:|
 | Input Layer         | (None, 5, 5, 3)  | 0         |
@@ -158,6 +182,8 @@ The CNN consists of an input layer, a convolutional layer with 32 filters, a fla
 | Flatten             | (None, 288)      | 0         |
 | Dense (64 neurons)  | (None, 64)       | 18,496    |
 | Output (4 neurons)  | (None, 4)        | 260       |
+
+</div>
 
 ### Action and Reward System  
 The agent can move up, right, down, or left. It earns a reward of +10 for reaching the goal, but loses 1 point for hitting a wall or moving out of bounds. If the agent gets closer to the goal, it gains a small reward of +0.1, while moving away results in a penalty of -0.05. Repeating the same move is discouraged by a -0.1 penalty.  
@@ -169,9 +195,13 @@ During training, the agent starts at a random position in the maze. It chooses a
 
 <p align="center">Illustraion 8: Solving Maze with RL</p>
 
-![alt text](maze_solution.gif)
+<p align="center">
+  <img src="maze_solution.gif" alt="Maze Solution">
+</p>
 
-![alt text](materials/outputrlreal.png)
+<p align="center">
+  <img src="materials/outputrlreal.png" alt="Output RL Real">
+</p>
 
 
 ### To summaruze what happened
@@ -188,8 +218,4 @@ The agent starts making better decisions and solves the maze more efficiently
 ### Conclusion  
 By encoding the maze as a structured grid and using a CNN-based DQN, we successfully trained an agent to solve all 10 mazes. The learning process improved over time as the agent refined its strategy. Further improvements could include optimizing the network, tuning hyperparameters, or applying this method to larger and more complex mazes.
 
-
-### Author contribution
-**An Nguyen:** CNN with encode - ALL, RL - 80%
-
-**Phuong Thao Hoang:** CNN pure - 80%. RL - 20%
+---------------------
