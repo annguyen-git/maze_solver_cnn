@@ -81,7 +81,7 @@ To achieve this, we reduced the image size to match the maze dimensions, making 
 <p align="center">Illustraion 2: Encoding Mazes</p>
 
 <p align="center">
-  <img src="materials/encode.png" alt="Description of image">
+  <img src="materials/encode.png" alt="Description of image" width="600">
 </p>
 
 We separated the path matrices as the target variable (Y) and fed them to the CNN.
@@ -89,7 +89,7 @@ We separated the path matrices as the target variable (Y) and fed them to the CN
 <p align="center">Illustraion 3: Split X and y - First Trial</p>
 
 <p align="center">
-  <img src="materials/pptsummary.png" alt="Description of image">
+  <img src="materials/pptsummary.png" alt="Description of image" width="600">
 </p>
 
 However, problems arose as the model performed poorly. We tried different models and increased the training size to 5,000 pairs of mazes and solutions, but still achieved 0% match.
@@ -99,7 +99,7 @@ Then, we realized that splitting the input (X) into channels might work. We used
 <p align="center">Illustraion 4: Split X to Channels</p>
 
 <p align="center">
-  <img src="materials/channels split.png" alt="Description of image">
+  <img src="materials/channels split.png" alt="Description of image" width="900">
 </p>
 
 - An X is now 3D array (3 channels), size 9x9x3
@@ -113,7 +113,7 @@ The graphs show training and validation loss, along with exact match accuracy ov
 <p align="center">Illustraion 5: Train and Loss - CNN with Encoded Input</p>
 
 <p align="center">
-  <img src="materials/Trainencode.png" alt="Description of image">
+  <img src="materials/Trainencode.png" alt="Description of image" width="600">
 </p>
 
 Although the accuracy appears low due to the strict 100% match requirement, the predicted results are actually quite good. This indicates that the model is effectively learning to solve the mazes, even if not every prediction is a perfect match.
@@ -129,11 +129,11 @@ The high accuracy, over 96%, can be explained by the imbalance in the target arr
 <p align="center">Illustraion 6: Performance on Test Set - CNN with Encoded Input</p>
 
 <p align="center">
-  <img src="materials/encodedpredict.png" alt="Encoded Predict">
+  <img src="materials/encodedpredict.png" alt="Encoded Predict" width="600">
 </p>
 
 <p align="center">
-  <img src="materials/predencode2.png" alt="Predicted Encode">
+  <img src="materials/predencode2.png" alt="Predicted Encode" width="600">
 </p>
 
 When applied to the 10 real mazes, the performance was impressive, with 7 out of 10 mazes solved correctly.
@@ -142,7 +142,7 @@ When applied to the 10 real mazes, the performance was impressive, with 7 out of
 <p align="center">Illustraion 7: Performance on 10 Real Mazes - CNN with Encoded Input</p>
 
 <p align="center">
-  <img src="materials/pptsummary1.png" alt="Summary">
+  <img src="materials/pptsummary1.png" alt="Summary" width="900">
 </p>
 
 ### Conclusion  
@@ -196,11 +196,11 @@ During training, the agent starts at a random position in the maze. It chooses a
 <p align="center">Illustraion 8: Solving Maze with RL</p>
 
 <p align="center">
-  <img src="maze_solution.gif" alt="Maze Solution">
+  <img src="maze_solution.gif" alt="Maze Solution" width="300">
 </p>
 
 <p align="center">
-  <img src="materials/outputrlreal.png" alt="Output RL Real">
+  <img src="materials/outputrlreal.png" alt="Output RL Real" width="300">
 </p>
 
 
