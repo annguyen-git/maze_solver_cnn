@@ -1,0 +1,8 @@
+.ipynb_checkpoints/
+__pycache__/
+env/
+draft.ipynb
+lib/
+archive/
+maze_solver_cnn.zip
+Contribution.html
