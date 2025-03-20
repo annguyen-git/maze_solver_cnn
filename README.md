@@ -99,7 +99,7 @@ Then, we realized that splitting the input (X) into channels might work. We used
 <p align="center">Illustraion 4: Split X to Channels</p>
 
 <p align="center">
-  <img src="materials/channels split.png" alt="Description of image" width="900">
+  <img src="materials/channels split.png" alt="Description of image" width="600">
 </p>
 
 - An X is now 3D array (3 channels), size 9x9x3
